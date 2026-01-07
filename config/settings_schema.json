@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent color",
+        "default": "#E53935"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_url",
+        "label": "Twitter URL"
+      }
+    ]
+  }
+]

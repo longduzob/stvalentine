@@ -1,0 +1,44 @@
+{
+  "general": {
+    "shipping_banner": "LIVRAISON GRATUITE SUR TOUTE COMMANDE. ACHETEZ MAINTENANT",
+    "search": "Recherche",
+    "account": "Compte",
+    "cart": "Panier",
+    "page": "Page"
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu principal"
+    },
+    "hero": {
+      "eyebrow": "Collection romance",
+      "heading": "Enfin, une meilleure façon de se sentir bien.",
+      "subheading": "Des produits premium livrés directement chez vous.",
+      "cta": "Découvrir le coffret & soutenir"
+    },
+    "footer": {
+      "newsletter_title": "Newsletter",
+      "newsletter_text": "Abonnez-vous à notre newsletter pour plus d'amour et de promos.",
+      "email_placeholder": "Votre email",
+      "subscribe": "S'abonner",
+      "quick_links": "Liens rapides",
+      "follow_us": "Suivez-nous",
+      "copyright": "© {{ year }} Valentine Point. Tous droits réservés."
+    },
+    "collection": {
+      "add_to_cart": "Ajouter au panier",
+      "empty": "Ajoutez une collection pour afficher les produits en vedette."
+    },
+    "product": {
+      "quantity": "Quantité",
+      "add_to_cart": "Ajouter au panier",
+      "buy_now": "Acheter maintenant",
+      "trust_shipping": "Livraison gratuite",
+      "trust_returns": "Retours sous 30 jours",
+      "trust_guarantee": "Garantie satisfaction",
+      "reviews_title": "Avis clients",
+      "review_one": "Un coffret parfait pour une soirée romantique.",
+      "review_two": "Livraison rapide et qualité exceptionnelle."
+    }
+  }
+}

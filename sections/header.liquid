@@ -1,0 +1,73 @@
+<section class="announcement-bar">
+  <p class="announcement-bar__text">{{ 'general.shipping_banner' | t }}</p>
+</section>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <nav class="site-header__nav" aria-label="{{ 'sections.header.menu' | t }}">
+      {% if section.settings.menu != blank %}
+        <ul class="site-header__menu">
+          {% for link in linklists[section.settings.menu].links %}
+            <li class="site-header__menu-item">
+              <a href="{{ link.url }}" class="site-header__link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </nav>
+
+    <div class="site-header__logo">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            alt="{{ shop.name }}"
+            loading="lazy"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+          >
+        {% else %}
+          <span>{{ section.settings.logo_text }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="site-header__icons">
+      <a href="{{ routes.search_url }}" class="site-header__icon" aria-label="{{ 'general.search' | t }}">
+        {% render 'icon-search' %}
+      </a>
+      <a href="{{ routes.account_url }}" class="site-header__icon" aria-label="{{ 'general.account' | t }}">
+        {% render 'icon-account' %}
+      </a>
+      <a href="{{ routes.cart_url }}" class="site-header__icon" aria-label="{{ 'general.cart' | t }}">
+        {% render 'icon-cart' %}
+        <span class="site-header__cart-count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "VALENTINE POINT"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "Romance Collection",
+        "heading": "Finally, a better way to feel better.",
+        "subheading": "Premium products delivered directly to your doorstep.",
+        "cta_label": "Shop the kit & give back",
+        "cta_link": "/collections/all"
+      }
+    },
+    "featured_one": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best gifts for couples",
+        "description": "Curated kits and keepsakes made for two.",
+        "product_limit": 4
+      }
+    },
+    "featured_two": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Valentine essentials",
+        "description": "Roses, chocolates, and heartfelt surprises.",
+        "product_limit": 4
+      }
+    }
+  },
+  "order": ["hero", "featured_one", "featured_two"]
+}

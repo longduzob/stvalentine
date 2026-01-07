@@ -1,0 +1,64 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__newsletter">
+      <h2 class="site-footer__heading">{{ 'sections.footer.newsletter_title' | t }}</h2>
+      <p class="site-footer__text">{{ 'sections.footer.newsletter_text' | t }}</p>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="{{ 'sections.footer.email_placeholder' | t }}"
+            required
+          >
+          <button type="submit" class="button button--primary">{{ 'sections.footer.subscribe' | t }}</button>
+        </div>
+      {% endform %}
+    </div>
+
+    <div class="site-footer__links">
+      <h2 class="site-footer__heading">{{ 'sections.footer.quick_links' | t }}</h2>
+      {% if section.settings.menu != blank %}
+        <ul>
+          {% for link in linklists[section.settings.menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="site-footer__social">
+      <h2 class="site-footer__heading">{{ 'sections.footer.follow_us' | t }}</h2>
+      <div class="site-footer__social-links">
+        {% if settings.social_facebook_url != blank %}
+          <a href="{{ settings.social_facebook_url }}" aria-label="Facebook">Facebook</a>
+        {% endif %}
+        {% if settings.social_instagram_url != blank %}
+          <a href="{{ settings.social_instagram_url }}" aria-label="Instagram">Instagram</a>
+        {% endif %}
+        {% if settings.social_twitter_url != blank %}
+          <a href="{{ settings.social_twitter_url }}" aria-label="Twitter">Twitter</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <p>{{ 'sections.footer.copyright' | t: year: 'now' | date: '%Y' }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Quick links",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}
