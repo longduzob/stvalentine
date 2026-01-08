@@ -1,0 +1,75 @@
+<section class="featured-collection">
+  <div class="featured-collection__header">
+    <h2>{{ section.settings.title }}</h2>
+    {% if section.settings.description != blank %}
+      <p>{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="featured-collection__grid">
+    {% if section.settings.collection != blank %}
+      {% for product in collections[section.settings.collection].products limit: section.settings.product_limit %}
+        <article class="product-card">
+          <a href="{{ product.url }}" class="product-card__image">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 480 }}"
+                alt="{{ product.title }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+          <div class="product-card__info">
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <p class="product-card__price">{{ product.price | money }}</p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="button button--secondary">{{ 'sections.collection.add_to_cart' | t }}</button>
+            </form>
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>{{ 'sections.collection.empty' | t }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Valentine essentials"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Curated romantic picks for the season."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

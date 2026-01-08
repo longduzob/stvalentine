@@ -1,0 +1,44 @@
+{
+  "general": {
+    "shipping_banner": "FREE SHIPPING ON EVERY ORDER. SHOP NOW",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "page": "Page"
+  },
+  "sections": {
+    "header": {
+      "menu": "Main menu"
+    },
+    "hero": {
+      "eyebrow": "Romance collection",
+      "heading": "Finally, a better way to feel better.",
+      "subheading": "Premium products delivered directly to your doorstep.",
+      "cta": "Shop the kit & give back"
+    },
+    "footer": {
+      "newsletter_title": "Newsletter",
+      "newsletter_text": "Subscribe for more love and promotions.",
+      "email_placeholder": "Your email",
+      "subscribe": "Subscribe",
+      "quick_links": "Quick links",
+      "follow_us": "Follow us",
+      "copyright": "© {{ year }} Valentine Point. All rights reserved."
+    },
+    "collection": {
+      "add_to_cart": "Add to cart",
+      "empty": "Add a collection to display featured products."
+    },
+    "product": {
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "buy_now": "Buy now",
+      "trust_shipping": "Free shipping",
+      "trust_returns": "30-day returns",
+      "trust_guarantee": "Satisfaction guarantee",
+      "reviews_title": "Customer reviews",
+      "review_one": "The perfect kit for a romantic evening.",
+      "review_two": "Fast delivery and outstanding quality."
+    }
+  }
+}
