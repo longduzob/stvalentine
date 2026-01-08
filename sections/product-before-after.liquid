@@ -1,0 +1,100 @@
+<section class="before-after" data-before-after>
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+      <p class="section-description">{{ section.settings.description }}</p>
+    </div>
+  </div>
+  <div class="before-after__toggle">
+    <button type="button" class="button button--secondary is-active" data-before>Avant</button>
+    <button type="button" class="button button--secondary" data-after>Après</button>
+  </div>
+  <div class="before-after__media">
+    {% if section.settings.before_image != blank %}
+      <img src="{{ section.settings.before_image | image_url: width: 900 }}" alt="{{ section.settings.before_label }}" data-before-image>
+    {% endif %}
+    {% if section.settings.after_image != blank %}
+      <img src="{{ section.settings.after_image | image_url: width: 900 }}" alt="{{ section.settings.after_label }}" class="is-hidden" data-after-image>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('[data-before-after]');
+    if (!section) return;
+    const beforeButton = section.querySelector('[data-before]');
+    const afterButton = section.querySelector('[data-after]');
+    const beforeImage = section.querySelector('[data-before-image]');
+    const afterImage = section.querySelector('[data-after-image]');
+    if (!beforeButton || !afterButton || !beforeImage || !afterImage) return;
+
+    beforeButton.addEventListener('click', () => {
+      beforeButton.classList.add('is-active');
+      afterButton.classList.remove('is-active');
+      beforeImage.classList.remove('is-hidden');
+      afterImage.classList.add('is-hidden');
+    });
+
+    afterButton.addEventListener('click', () => {
+      afterButton.classList.add('is-active');
+      beforeButton.classList.remove('is-active');
+      afterImage.classList.remove('is-hidden');
+      beforeImage.classList.add('is-hidden');
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Before / After",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Effet wow"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Avant / Après ouverture"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Montrez l'effet surprise du cadeau."
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Boîte fermée"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "Boîte ouverte"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After"
+    }
+  ]
+}
+{% endschema %}

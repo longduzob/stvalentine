@@ -1,5 +1,12 @@
 <section class="announcement-bar">
-  <p class="announcement-bar__text">{{ 'general.shipping_banner' | t }}</p>
+  <div class="announcement-bar__inner">
+    <span class="announcement-bar__text">{{ section.settings.announcement_text }}</span>
+    {% if section.settings.announcement_link != blank %}
+      <a class="announcement-bar__link" href="{{ section.settings.announcement_link }}">
+        {{ section.settings.announcement_link_label }}
+      </a>
+    {% endif %}
+  </div>
 </section>
 
 <header class="site-header">
@@ -12,6 +19,9 @@
               <a href="{{ link.url }}" class="site-header__link">{{ link.title }}</a>
             </li>
           {% endfor %}
+          <li class="site-header__menu-item">
+            <a href="{{ section.settings.catalogue_link }}" class="site-header__link">{{ section.settings.catalogue_label }}</a>
+          </li>
         </ul>
       {% endif %}
     </nav>
@@ -29,7 +39,11 @@
         {% else %}
           <span>{{ section.settings.logo_text }}</span>
         {% endif %}
+        <span class="site-header__heart">{% render 'icon-heart' %}</span>
       </a>
+      {% if section.settings.show_valentine_badge %}
+        <span class="site-header__badge">{{ section.settings.valentine_badge_text }}</span>
+      {% endif %}
     </div>
 
     <div class="site-header__icons">
@@ -67,6 +81,48 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "catalogue_label",
+      "label": "Catalogue label",
+      "default": "Catalogue"
+    },
+    {
+      "type": "url",
+      "id": "catalogue_link",
+      "label": "Catalogue link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Livraison rapide avant le 14 février 💌"
+    },
+    {
+      "type": "text",
+      "id": "announcement_link_label",
+      "label": "Announcement button label",
+      "default": "Voir la collection"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_valentine_badge",
+      "label": "Show valentine badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "valentine_badge_text",
+      "label": "Valentine badge text",
+      "default": "💌 Spécial Saint-Valentin"
     }
   ]
 }

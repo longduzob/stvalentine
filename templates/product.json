@@ -3,7 +3,15 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "before_after": {
+      "type": "product-before-after",
+      "settings": {}
+    },
+    "complementary": {
+      "type": "product-complementary",
+      "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["main", "before_after", "complementary"]
 }

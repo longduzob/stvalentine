@@ -3,29 +3,73 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "Romance Collection",
-        "heading": "Finally, a better way to feel better.",
-        "subheading": "Premium products delivered directly to your doorstep.",
-        "cta_label": "Shop the kit & give back",
-        "cta_link": "/collections/all"
+        "eyebrow": "Saint-Valentin 2026",
+        "heading": "Offrez un moment inoubliable.",
+        "subheading": "Bouquets, cadeaux viraux TikTok, coffrets romantiques — prêts à offrir.",
+        "cta_label": "Découvrir la collection",
+        "cta_link": "/collections/all",
+        "secondary_cta_label": "Idées cadeaux",
+        "secondary_cta_link": "/collections/all"
       }
     },
-    "featured_one": {
-      "type": "featured-collection",
+    "countdown": {
+      "type": "countdown-valentine",
+      "settings": {}
+    },
+    "best_sellers": {
+      "type": "product-grid",
       "settings": {
-        "title": "Best gifts for couples",
-        "description": "Curated kits and keepsakes made for two.",
-        "product_limit": 4
+        "eyebrow": "Coup de cœur",
+        "title": "Best Sellers Saint-Valentin",
+        "description": "Les cadeaux les plus partagés sur TikTok et Instagram.",
+        "cta_label": "Voir tout",
+        "cta_link": "/collections/all",
+        "layout": "carousel"
       }
     },
-    "featured_two": {
-      "type": "featured-collection",
+    "highlight": {
+      "type": "product-highlight",
       "settings": {
-        "title": "Valentine essentials",
-        "description": "Roses, chocolates, and heartfelt surprises.",
-        "product_limit": 4
+        "eyebrow": "Idée cadeau TikTok",
+        "title": "Le bouquet Lego qui fait sensation",
+        "description": "Un cadeau surprise, élégant et viral."
       }
+    },
+    "wow_gifts": {
+      "type": "product-grid",
+      "settings": {
+        "eyebrow": "Cadeaux qui font WOW",
+        "title": "Effet wow garanti",
+        "description": "Boîtes à bagues, bouquets premium, cadeaux viraux.",
+        "layout": "grid"
+      }
+    },
+    "gift_categories": {
+      "type": "gift-categories",
+      "settings": {}
+    },
+    "bundle": {
+      "type": "bundle-section",
+      "settings": {}
+    },
+    "value_props": {
+      "type": "value-props",
+      "settings": {}
+    },
+    "social_proof": {
+      "type": "social-proof",
+      "settings": {}
     }
   },
-  "order": ["hero", "featured_one", "featured_two"]
+  "order": [
+    "hero",
+    "countdown",
+    "best_sellers",
+    "highlight",
+    "wow_gifts",
+    "gift_categories",
+    "bundle",
+    "value_props",
+    "social_proof"
+  ]
 }

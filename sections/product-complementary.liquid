@@ -1,0 +1,97 @@
+<section class="product-complementary">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+      <p class="section-description">{{ section.settings.description }}</p>
+    </div>
+  </div>
+  {% assign complementary_collection = collections[section.settings.collection] %}
+  {% if complementary_collection != blank %}
+    <div class="product-grid__items product-grid__items--grid product-grid__items--cols-{{ section.settings.columns }}">
+      {% for product in complementary_collection.products limit: section.settings.product_limit %}
+        <article class="product-card">
+          <a href="{{ product.url }}" class="product-card__image">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 500 }}"
+                alt="{{ product.title }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+          <div class="product-card__info">
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <p class="product-card__price">{{ product.price | money }}</p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="button button--secondary">{{ section.settings.add_to_cart_label }}</button>
+            </form>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Product complementary",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Complète ton cadeau"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tu peux aussi aimer"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Ajoutez un détail en plus pour un effet encore plus wow."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Ajouter"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product complementary"
+    }
+  ]
+}
+{% endschema %}
