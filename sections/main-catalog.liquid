@@ -1,0 +1,156 @@
+<section class="catalog">
+  {% assign catalog_collection = collections[section.settings.collection] %}
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ section.settings.title }}</h1>
+      <p class="section-description">{{ section.settings.description }}</p>
+    </div>
+    <form method="get" action="{{ catalog_collection.url }}" class="catalog__sort">
+      <label for="SortBy">Trier par</label>
+      <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+        {% for option in catalog_collection.sort_options %}
+          <option value="{{ option.value }}" {% if catalog_collection.sort_by == option.value %}selected{% endif %}>
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+
+  {% if section.settings.enable_filters and catalog_collection.filters.size > 0 %}
+    <div class="catalog__filters">
+      {% for filter in catalog_collection.filters %}
+        <div class="catalog__filter">
+          <h3>{{ filter.label }}</h3>
+          <ul>
+            {% for value in filter.values %}
+              <li>
+                {% if value.active %}
+                  <a href="{{ value.url_to_remove }}">{{ value.label }}</a>
+                {% else %}
+                  <a href="{{ value.url_to_add }}">{{ value.label }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="product-grid__items product-grid__items--grid product-grid__items--cols-{{ section.settings.columns }}">
+    {% paginate catalog_collection.products by section.settings.products_per_page %}
+      {% for product in catalog_collection.products %}
+        <article class="product-card">
+          <a href="{{ product.url }}" class="product-card__image">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.title }}"
+                loading="lazy"
+              >
+            {% endif %}
+            {% if section.settings.show_badges %}
+              <div class="product-card__badges">
+                <span class="badge">{{ section.settings.badge_label }}</span>
+              </div>
+            {% endif %}
+          </a>
+          <div class="product-card__info">
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <p class="product-card__price">{{ product.price | money }}</p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="button button--secondary">{{ section.settings.add_to_cart_label }}</button>
+            </form>
+          </div>
+        </article>
+      {% endfor %}
+      <div class="catalog__pagination">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main catalog",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "default": "all"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Catalogue"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tous les cadeaux disponibles"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Choisissez le cadeau parfait, trié comme vous voulez."
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "Enable filters",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Badge label",
+      "default": "Saint-Valentin"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Ajouter"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main catalog"
+    }
+  ]
+}
+{% endschema %}

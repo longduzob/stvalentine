@@ -9,6 +9,12 @@
         "default": "#E53935"
       },
       {
+        "type": "checkbox",
+        "id": "enable_sticky_atc",
+        "label": "Enable sticky add to cart (mobile)",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "social_facebook_url",
         "label": "Facebook URL"
@@ -17,6 +23,11 @@
         "type": "text",
         "id": "social_instagram_url",
         "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_url",
+        "label": "TikTok URL"
       },
       {
         "type": "text",

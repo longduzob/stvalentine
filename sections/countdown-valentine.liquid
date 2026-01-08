@@ -1,0 +1,103 @@
+<section class="countdown" data-countdown-section>
+  <div class="countdown__inner">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.title }}</h2>
+      <p class="section-description">{{ section.settings.description }}</p>
+    </div>
+    <div class="countdown__timer" data-countdown-timer data-date="{{ section.settings.end_date }}">
+      <div class="countdown__unit">
+        <span data-days>00</span>
+        <small>jours</small>
+      </div>
+      <div class="countdown__unit">
+        <span data-hours>00</span>
+        <small>heures</small>
+      </div>
+      <div class="countdown__unit">
+        <span data-minutes>00</span>
+        <small>minutes</small>
+      </div>
+    </div>
+    {% if section.settings.cta_label != blank %}
+      <a class="button button--primary" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const timer = document.querySelector('[data-countdown-timer]');
+    if (!timer) return;
+    const targetDate = new Date(timer.dataset.date);
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        timer.querySelector('[data-days]').textContent = '00';
+        timer.querySelector('[data-hours]').textContent = '00';
+        timer.querySelector('[data-minutes]').textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      timer.querySelector('[data-days]').textContent = String(days).padStart(2, '0');
+      timer.querySelector('[data-hours]').textContent = String(hours).padStart(2, '0');
+      timer.querySelector('[data-minutes]').textContent = String(minutes).padStart(2, '0');
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Countdown Saint-Valentin",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Compte à rebours"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Plus que quelques jours pour livrer avant le 14 février"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Commandez maintenant pour garantir l'effet wow." 
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End date (YYYY-MM-DDTHH:MM:SS)",
+      "default": "2026-02-14T23:59:00"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Voir les cadeaux"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Saint-Valentin"
+    }
+  ]
+}
+{% endschema %}

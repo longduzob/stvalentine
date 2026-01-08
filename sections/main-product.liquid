@@ -1,4 +1,4 @@
-<section class="product">
+<section class="product" data-product-section>
   <div class="product__media">
     {% if product.media.size > 0 %}
       <div class="product__gallery">
@@ -12,16 +12,23 @@
   </div>
 
   <div class="product__details">
+    {% if section.settings.show_badges %}
+      <div class="product__badges">
+        <span class="badge">{{ section.settings.badge_one }}</span>
+        <span class="badge badge--outline">{{ section.settings.badge_two }}</span>
+        <span class="badge badge--outline">{{ section.settings.badge_three }}</span>
+      </div>
+    {% endif %}
     <h1>{{ product.title }}</h1>
-    <p class="product__price">{{ product.price | money }}</p>
+    <p class="product__price" data-product-price>{{ product.price | money }}</p>
     <div class="product__description">{{ product.description }}</div>
 
-    <form method="post" action="/cart/add" class="product__form">
+    <form method="post" action="/cart/add" class="product__form" data-product-form>
       {% if product.has_only_default_variant == false %}
         {% for option in product.options_with_values %}
           <label class="product__option">
             {{ option.name }}
-            <select name="options[{{ option.name }}]">
+            <select name="options[{{ option.name }}]" data-option-select>
               {% for value in option.values %}
                 <option value="{{ value }}">{{ value }}</option>
               {% endfor %}
@@ -33,17 +40,22 @@
         {{ 'sections.product.quantity' | t }}
         <input type="number" name="quantity" value="1" min="1">
       </label>
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-id>
       <div class="product__actions">
         <button type="submit" class="button button--primary">{{ 'sections.product.add_to_cart' | t }}</button>
         <button type="button" class="button button--secondary">{{ 'sections.product.buy_now' | t }}</button>
       </div>
     </form>
 
+    <div class="product__valentine">
+      <h3>{{ section.settings.valentine_title }}</h3>
+      <p>{{ section.settings.valentine_text }}</p>
+    </div>
+
     <div class="product__trust">
-      <div>🚚 {{ 'sections.product.trust_shipping' | t }}</div>
-      <div>🔄 {{ 'sections.product.trust_returns' | t }}</div>
-      <div>❤️ {{ 'sections.product.trust_guarantee' | t }}</div>
+      <div>🚚 {{ section.settings.trust_shipping }}</div>
+      <div>🔄 {{ section.settings.trust_returns }}</div>
+      <div>🔒 {{ section.settings.trust_payment }}</div>
     </div>
 
     <div class="product__reviews" id="shopify-product-reviews">
@@ -60,10 +72,162 @@
   </div>
 </section>
 
+{% if settings.enable_sticky_atc %}
+  <div class="sticky-atc" data-sticky-atc>
+    <div class="sticky-atc__content">
+      <div>
+        <strong>{{ product.title }}</strong>
+        <span data-sticky-price>{{ product.price | money }}</span>
+      </div>
+      <form method="post" action="/cart/add" class="sticky-atc__form">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-sticky-variant>
+        {% if product.has_only_default_variant == false %}
+          <select class="sticky-atc__select" data-sticky-select>
+            {% for variant in product.variants %}
+              <option value="{{ variant.id }}" data-price="{{ variant.price | money }}">
+                {{ variant.title }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endif %}
+        <button type="submit" class="button button--primary">Ajouter</button>
+      </form>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const productSection = document.querySelector('[data-product-section]');
+    if (!productSection) return;
+
+    const variantInput = productSection.querySelector('[data-variant-id]');
+    const optionSelects = productSection.querySelectorAll('[data-option-select]');
+    const priceDisplay = productSection.querySelector('[data-product-price]');
+
+    const updateVariant = () => {
+      const selectedOptions = Array.from(optionSelects).map((select) => select.value);
+      const match = window.Shopify?.product?.variants?.find((variant) => {
+        return variant.options.every((option, index) => option === selectedOptions[index]);
+      });
+      if (match && variantInput) {
+        variantInput.value = match.id;
+        if (priceDisplay) {
+          priceDisplay.textContent = match.price;
+        }
+      }
+    };
+
+    optionSelects.forEach((select) => select.addEventListener('change', updateVariant));
+
+    const stickyBar = document.querySelector('[data-sticky-atc]');
+    if (stickyBar) {
+      const stickySelect = stickyBar.querySelector('[data-sticky-select]');
+      const stickyPrice = stickyBar.querySelector('[data-sticky-price]');
+      const stickyVariant = stickyBar.querySelector('[data-sticky-variant]');
+
+      const toggleSticky = () => {
+        const scrollPosition = window.scrollY || window.pageYOffset;
+        stickyBar.classList.toggle('is-visible', scrollPosition > 400);
+      };
+
+      if (stickySelect) {
+        stickySelect.addEventListener('change', () => {
+          const selected = stickySelect.options[stickySelect.selectedIndex];
+          stickyVariant.value = selected.value;
+          stickyPrice.textContent = selected.dataset.price;
+        });
+      }
+
+      toggleSticky();
+      window.addEventListener('scroll', toggleSticky, { passive: true });
+    }
+  });
+</script>
+
+<script type="application/json" data-product-json>
+  {
+    "variants": [
+      {% for variant in product.variants %}
+        {
+          "id": {{ variant.id }},
+          "options": {{ variant.options | json }},
+          "price": {{ variant.price | money | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const productJson = document.querySelector('[data-product-json]');
+    if (productJson) {
+      window.Shopify = window.Shopify || {};
+      window.Shopify.product = JSON.parse(productJson.textContent);
+    }
+  });
+</script>
+
 {% schema %}
 {
   "name": "Main product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_one",
+      "label": "Badge one",
+      "default": "Idée cadeau"
+    },
+    {
+      "type": "text",
+      "id": "badge_two",
+      "label": "Badge two",
+      "default": "Best Seller"
+    },
+    {
+      "type": "text",
+      "id": "badge_three",
+      "label": "Badge three",
+      "default": "Saint-Valentin"
+    },
+    {
+      "type": "text",
+      "id": "valentine_title",
+      "label": "Valentine title",
+      "default": "Pourquoi c'est parfait pour la Saint-Valentin ❤️"
+    },
+    {
+      "type": "textarea",
+      "id": "valentine_text",
+      "label": "Valentine text",
+      "default": "Effet surprise garanti, prêt à offrir et pensé pour un moment inoubliable."
+    },
+    {
+      "type": "text",
+      "id": "trust_shipping",
+      "label": "Trust shipping",
+      "default": "Livraison rapide avant le 14 février"
+    },
+    {
+      "type": "text",
+      "id": "trust_returns",
+      "label": "Trust returns",
+      "default": "Retours faciles sous 30 jours"
+    },
+    {
+      "type": "text",
+      "id": "trust_payment",
+      "label": "Trust payment",
+      "default": "Paiement sécurisé"
+    }
+  ],
   "presets": [
     {
       "name": "Main product"

@@ -31,14 +31,27 @@
     <div class="site-footer__social">
       <h2 class="site-footer__heading">{{ 'sections.footer.follow_us' | t }}</h2>
       <div class="site-footer__social-links">
-        {% if settings.social_facebook_url != blank %}
-          <a href="{{ settings.social_facebook_url }}" aria-label="Facebook">Facebook</a>
-        {% endif %}
         {% if settings.social_instagram_url != blank %}
-          <a href="{{ settings.social_instagram_url }}" aria-label="Instagram">Instagram</a>
+          <a href="{{ settings.social_instagram_url }}" aria-label="Instagram" class="site-footer__social-link">
+            {% render 'icon-instagram' %}
+            <span>Instagram</span>
+          </a>
+        {% endif %}
+        {% if settings.social_tiktok_url != blank %}
+          <a href="{{ settings.social_tiktok_url }}" aria-label="TikTok" class="site-footer__social-link">
+            {% render 'icon-tiktok' %}
+            <span>TikTok</span>
+          </a>
+        {% endif %}
+        {% if settings.social_facebook_url != blank %}
+          <a href="{{ settings.social_facebook_url }}" aria-label="Facebook" class="site-footer__social-link">
+            <span>Facebook</span>
+          </a>
         {% endif %}
         {% if settings.social_twitter_url != blank %}
-          <a href="{{ settings.social_twitter_url }}" aria-label="Twitter">Twitter</a>
+          <a href="{{ settings.social_twitter_url }}" aria-label="Twitter" class="site-footer__social-link">
+            <span>Twitter</span>
+          </a>
         {% endif %}
       </div>
     </div>
