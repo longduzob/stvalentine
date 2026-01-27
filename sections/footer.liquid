@@ -21,7 +21,7 @@
       <h2 class="site-footer__heading">{{ 'sections.footer.quick_links' | t }}</h2>
       {% if section.settings.menu != blank %}
         <ul>
-          {% for link in linklists[section.settings.menu].links %}
+          {% for link in section.settings.menu.links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
