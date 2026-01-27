@@ -1,0 +1,43 @@
+<section class="page page--contact">
+  <div class="page__inner">
+    <header class="page__header">
+      <h1>{{ page.title }}</h1>
+    </header>
+    <div class="page__content">
+      {{ page.content }}
+    </div>
+    <div class="contact-form">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="contact-form__success">{{ 'templates.contact.form.post_success' | t }}</p>
+        {% endif %}
+        {% if form.errors %}
+          <div class="contact-form__errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+        <div class="contact-form__fields">
+          <label for="ContactName">{{ 'templates.contact.form.name' | t }}</label>
+          <input type="text" id="ContactName" name="contact[name]" value="{{ form.name }}" required>
+
+          <label for="ContactEmail">{{ 'templates.contact.form.email' | t }}</label>
+          <input type="email" id="ContactEmail" name="contact[email]" value="{{ form.email }}" required>
+
+          <label for="ContactPhone">{{ 'templates.contact.form.phone' | t }}</label>
+          <input type="tel" id="ContactPhone" name="contact[phone]" value="{{ form.phone }}">
+
+          <label for="ContactMessage">{{ 'templates.contact.form.message' | t }}</label>
+          <textarea id="ContactMessage" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+        </div>
+        <button type="submit" class="button button--primary">{{ 'templates.contact.form.send' | t }}</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main contact",
+  "settings": []
+}
+{% endschema %}

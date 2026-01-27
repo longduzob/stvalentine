@@ -1,0 +1,161 @@
+{% assign active_collection = collection %}
+{% if active_collection == nil and section.settings.fallback_collection != blank %}
+  {% assign active_collection = collections[section.settings.fallback_collection] %}
+{% endif %}
+
+<section class="catalog">
+  <div class="section-header">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ active_collection.title }}</h1>
+      {% if section.settings.show_description and active_collection.description != blank %}
+        <p class="section-description">{{ active_collection.description }}</p>
+      {% endif %}
+    </div>
+    {% if active_collection %}
+      <form method="get" action="{{ active_collection.url }}" class="catalog__sort">
+        <label for="SortBy">Trier par</label>
+        <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+          {% for option in active_collection.sort_options %}
+            <option value="{{ option.value }}" {% if active_collection.sort_by == option.value %}selected{% endif %}>
+              {{ option.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+    {% endif %}
+  </div>
+
+  {% if section.settings.enable_filters and active_collection and active_collection.filters.size > 0 %}
+    <div class="catalog__filters">
+      {% for filter in active_collection.filters %}
+        <div class="catalog__filter">
+          <h3>{{ filter.label }}</h3>
+          <ul>
+            {% for value in filter.values %}
+              <li>
+                {% if value.active %}
+                  <a href="{{ value.url_to_remove }}">{{ value.label }}</a>
+                {% else %}
+                  <a href="{{ value.url_to_add }}">{{ value.label }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if active_collection %}
+    <div class="product-grid__items product-grid__items--grid product-grid__items--cols-{{ section.settings.columns }}">
+      {% paginate active_collection.products by section.settings.products_per_page %}
+        {% for product in active_collection.products %}
+          <article class="product-card">
+            <a href="{{ product.url }}" class="product-card__image">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.title }}"
+                  loading="lazy"
+                >
+              {% endif %}
+              {% if section.settings.show_badges %}
+                <div class="product-card__badges">
+                  <span class="badge">{{ section.settings.badge_label }}</span>
+                </div>
+              {% endif %}
+            </a>
+            <div class="product-card__info">
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <p class="product-card__price">{{ product.price | money }}</p>
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" class="button button--secondary">{{ section.settings.add_to_cart_label }}</button>
+              </form>
+            </div>
+          </article>
+        {% endfor %}
+        <div class="catalog__pagination">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endpaginate %}
+    </div>
+  {% else %}
+    <p class="catalog__empty">{{ 'collections.general.no_matches' | t }}</p>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Fallback collection"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "Enable filters",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Badge label",
+      "default": "Conseil terrain"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Ajouter"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main collection"
+    }
+  ]
+}
+{% endschema %}

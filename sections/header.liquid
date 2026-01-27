@@ -14,7 +14,7 @@
     <nav class="site-header__nav" aria-label="{{ 'sections.header.menu' | t }}">
       {% if section.settings.menu != blank %}
         <ul class="site-header__menu">
-          {% for link in linklists[section.settings.menu].links %}
+          {% for link in section.settings.menu.links %}
             <li class="site-header__menu-item">
               <a href="{{ link.url }}" class="site-header__link">{{ link.title }}</a>
             </li>
