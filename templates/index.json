@@ -3,25 +3,25 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "Saint-Valentin 2026",
-        "heading": "Offrez un moment inoubliable.",
-        "subheading": "Bouquets, cadeaux viraux TikTok, coffrets romantiques — prêts à offrir.",
-        "cta_label": "Découvrir la collection",
+        "eyebrow": "Matériel outdoor",
+        "heading": "Choisis ton équipement selon l'usage réel.",
+        "subheading": "Randonnée, trek, bivouac, alpinisme, trail, bikepacking : on te guide sans blabla marketing.",
+        "cta_label": "Voir l'équipement",
         "cta_link": "/collections/all",
-        "secondary_cta_label": "Idées cadeaux",
+        "secondary_cta_label": "Guide de choix",
         "secondary_cta_link": "/collections/all"
       }
     },
     "countdown": {
-      "type": "countdown-valentine",
+      "type": "shipping-window",
       "settings": {}
     },
     "best_sellers": {
       "type": "product-grid",
       "settings": {
-        "eyebrow": "Coup de cœur",
-        "title": "Best Sellers Saint-Valentin",
-        "description": "Les cadeaux les plus partagés sur TikTok et Instagram.",
+        "eyebrow": "Top pratiques",
+        "title": "Les essentiels testés sur le terrain",
+        "description": "Des produits utiles, pas juste tendance.",
         "cta_label": "Voir tout",
         "cta_link": "/collections/all",
         "layout": "carousel"
@@ -30,22 +30,22 @@
     "highlight": {
       "type": "product-highlight",
       "settings": {
-        "eyebrow": "Idée cadeau TikTok",
-        "title": "Le bouquet Lego qui fait sensation",
-        "description": "Un cadeau surprise, élégant et viral."
+        "eyebrow": "Focus équipement",
+        "title": "Tente 3 saisons : le bon choix si tu pars souvent",
+        "description": "Léger, fiable, mais pas pour l'usage hiver engagé."
       }
     },
-    "wow_gifts": {
+    "gear_picks": {
       "type": "product-grid",
       "settings": {
-        "eyebrow": "Cadeaux qui font WOW",
-        "title": "Effet wow garanti",
-        "description": "Boîtes à bagues, bouquets premium, cadeaux viraux.",
+        "eyebrow": "Choix terrain",
+        "title": "Matériel qui évite les erreurs",
+        "description": "Des références simples à comprendre, avec leurs limites.",
         "layout": "grid"
       }
     },
-    "gift_categories": {
-      "type": "gift-categories",
+    "activity_categories": {
+      "type": "activity-categories",
       "settings": {}
     },
     "bundle": {
@@ -66,8 +66,8 @@
     "countdown",
     "best_sellers",
     "highlight",
-    "wow_gifts",
-    "gift_categories",
+    "gear_picks",
+    "activity_categories",
     "bundle",
     "value_props",
     "social_proof"

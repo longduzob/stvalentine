@@ -1,4 +1,4 @@
-<section class="gift-categories">
+<section class="activity-categories">
   <div class="section-header">
     <div>
       <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -8,15 +8,15 @@
       {% endif %}
     </div>
   </div>
-  <div class="gift-categories__grid">
+  <div class="activity-categories__grid">
     {% for block in section.blocks %}
-      <a class="gift-category" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+      <a class="activity-category" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
         {% if block.settings.image != blank %}
           <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title }}" loading="lazy">
         {% endif %}
-        <div class="gift-category__content">
+        <div class="activity-category__content">
           <h3>{{ block.settings.title }}</h3>
-          <span class="gift-category__cta">{{ block.settings.cta_label }}</span>
+          <span class="activity-category__cta">{{ block.settings.cta_label }}</span>
         </div>
       </a>
     {% endfor %}
@@ -25,25 +25,25 @@
 
 {% schema %}
 {
-  "name": "Gift categories",
+  "name": "Activity categories",
   "settings": [
     {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Catégories cadeaux"
+      "default": "Catégories par pratique"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Trouve le cadeau parfait"
+      "default": "Choisis selon ton terrain"
     },
     {
       "type": "text",
       "id": "description",
       "label": "Description",
-      "default": "Sélections rapides pour chaque personne qui compte."
+      "default": "Des sélections claires pour éviter les erreurs de choix."
     }
   ],
   "blocks": [
@@ -60,13 +60,13 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Pour elle"
+          "default": "Randonnée"
         },
         {
           "type": "text",
           "id": "cta_label",
           "label": "CTA label",
-          "default": "Découvrir"
+          "default": "Voir la sélection"
         },
         {
           "type": "url",
@@ -79,7 +79,7 @@
   "max_blocks": 4,
   "presets": [
     {
-      "name": "Gift categories",
+      "name": "Activity categories",
       "blocks": [
         { "type": "category" },
         { "type": "category" },

@@ -1,8 +1,8 @@
 :root {
-  --color-accent: #e53935;
+  --color-accent: #2f6b4f;
   --color-dark: #1f1f1f;
   --color-light: #ffffff;
-  --color-muted: #f7f6f5;
+  --color-muted: #f2f5f1;
   --color-border: #ececec;
 }
 
@@ -161,7 +161,7 @@ img {
   gap: 0.5rem;
 }
 
-.site-header__heart {
+.site-header__mark {
   color: var(--color-accent);
 }
 
@@ -238,7 +238,7 @@ img {
 .featured-collection,
 .product-grid,
 .product-highlight,
-.gift-categories,
+.activity-categories,
 .bundle-section,
 .value-props,
 .social-proof,
@@ -321,13 +321,13 @@ img {
   justify-content: center;
 }
 
-.gift-categories__grid {
+.activity-categories__grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.gift-category {
+.activity-category {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -335,12 +335,12 @@ img {
   position: relative;
 }
 
-.gift-category__content {
+.activity-category__content {
   padding: 1.5rem;
   background: var(--color-light);
 }
 
-.gift-category__cta {
+.activity-category__cta {
   font-weight: 600;
   color: var(--color-accent);
 }
@@ -497,7 +497,7 @@ img {
   margin-bottom: 1rem;
 }
 
-.product__valentine {
+.product__field-note {
   border: 1px solid var(--color-border);
   padding: 1rem;
   border-radius: 10px;

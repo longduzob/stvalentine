@@ -39,10 +39,10 @@
         {% else %}
           <span>{{ section.settings.logo_text }}</span>
         {% endif %}
-        <span class="site-header__heart">{% render 'icon-heart' %}</span>
+        <span class="site-header__mark">{% render 'icon-compass' %}</span>
       </a>
-      {% if section.settings.show_valentine_badge %}
-        <span class="site-header__badge">{{ section.settings.valentine_badge_text }}</span>
+      {% if section.settings.show_advisor_badge %}
+        <span class="site-header__badge">{{ section.settings.advisor_badge_text }}</span>
       {% endif %}
     </div>
 
@@ -74,7 +74,7 @@
       "type": "text",
       "id": "logo_text",
       "label": "Logo text",
-      "default": "VALENTINE POINT"
+      "default": "ORIENT OUTDOOR"
     },
     {
       "type": "link_list",
@@ -86,7 +86,7 @@
       "type": "text",
       "id": "catalogue_label",
       "label": "Catalogue label",
-      "default": "Catalogue"
+      "default": "Équipement"
     },
     {
       "type": "url",
@@ -98,13 +98,13 @@
       "type": "text",
       "id": "announcement_text",
       "label": "Announcement text",
-      "default": "Livraison rapide avant le 14 février 💌"
+      "default": "Conseils terrain + expédition 48h depuis la France"
     },
     {
       "type": "text",
       "id": "announcement_link_label",
       "label": "Announcement button label",
-      "default": "Voir la collection"
+      "default": "Voir l'équipement"
     },
     {
       "type": "url",
@@ -114,15 +114,15 @@
     },
     {
       "type": "checkbox",
-      "id": "show_valentine_badge",
-      "label": "Show valentine badge",
+      "id": "show_advisor_badge",
+      "label": "Show advisor badge",
       "default": true
     },
     {
       "type": "text",
-      "id": "valentine_badge_text",
-      "label": "Valentine badge text",
-      "default": "💌 Spécial Saint-Valentin"
+      "id": "advisor_badge_text",
+      "label": "Advisor badge text",
+      "default": "Guide terrain indépendant"
     }
   ]
 }
