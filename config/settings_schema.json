@@ -6,7 +6,7 @@
         "type": "color",
         "id": "accent_color",
         "label": "Accent color",
-        "default": "#E53935"
+        "default": "#2F6B4F"
       },
       {
         "type": "checkbox",

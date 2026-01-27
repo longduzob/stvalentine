@@ -1,6 +1,6 @@
 {
   "general": {
-    "shipping_banner": "FREE SHIPPING ON EVERY ORDER. SHOP NOW",
+    "shipping_banner": "48H SHIPPING + INDEPENDENT FIELD ADVICE",
     "search": "Search",
     "account": "Account",
     "cart": "Cart",
@@ -11,19 +11,19 @@
       "menu": "Main menu"
     },
     "hero": {
-      "eyebrow": "Romance collection",
-      "heading": "Finally, a better way to feel better.",
-      "subheading": "Premium products delivered directly to your doorstep.",
-      "cta": "Shop the kit & give back"
+      "eyebrow": "Outdoor gear",
+      "heading": "Choose gear based on real use.",
+      "subheading": "Clear guides, honest limits, no hype.",
+      "cta": "Shop gear"
     },
     "footer": {
       "newsletter_title": "Newsletter",
-      "newsletter_text": "Subscribe for more love and promotions.",
+      "newsletter_text": "Field tips, checklists, and honest feedback.",
       "email_placeholder": "Your email",
       "subscribe": "Subscribe",
       "quick_links": "Quick links",
       "follow_us": "Follow us",
-      "copyright": "© {{ year }} Valentine Point. All rights reserved."
+      "copyright": "© {{ year }} Orient Outdoor. All rights reserved."
     },
     "collection": {
       "add_to_cart": "Add to cart",
@@ -33,12 +33,12 @@
       "quantity": "Quantity",
       "add_to_cart": "Add to cart",
       "buy_now": "Buy now",
-      "trust_shipping": "Free shipping",
+      "trust_shipping": "48h shipping",
       "trust_returns": "30-day returns",
-      "trust_guarantee": "Satisfaction guarantee",
+      "trust_guarantee": "Honest advice",
       "reviews_title": "Customer reviews",
-      "review_one": "The perfect kit for a romantic evening.",
-      "review_two": "Fast delivery and outstanding quality."
+      "review_one": "Great for 3-season hiking, not for harsh winter use.",
+      "review_two": "Light and practical, but needs careful setup."
     }
   }
 }

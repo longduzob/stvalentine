@@ -1,6 +1,6 @@
 {
   "general": {
-    "shipping_banner": "LIVRAISON GRATUITE SUR TOUTE COMMANDE. ACHETEZ MAINTENANT",
+    "shipping_banner": "EXPÉDITION 48H + CONSEILS TERRAIN INDÉPENDANTS",
     "search": "Recherche",
     "account": "Compte",
     "cart": "Panier",
@@ -11,19 +11,19 @@
       "menu": "Menu principal"
     },
     "hero": {
-      "eyebrow": "Collection romance",
-      "heading": "Enfin, une meilleure façon de se sentir bien.",
-      "subheading": "Des produits premium livrés directement chez vous.",
-      "cta": "Découvrir le coffret & soutenir"
+      "eyebrow": "Matériel outdoor",
+      "heading": "Choisis ton équipement selon l'usage réel.",
+      "subheading": "Guides clairs, limites expliquées, pas de promesses inutiles.",
+      "cta": "Voir l'équipement"
     },
     "footer": {
       "newsletter_title": "Newsletter",
-      "newsletter_text": "Abonnez-vous à notre newsletter pour plus d'amour et de promos.",
+      "newsletter_text": "Conseils terrain, checklists et retours d'expérience.",
       "email_placeholder": "Votre email",
       "subscribe": "S'abonner",
       "quick_links": "Liens rapides",
       "follow_us": "Suivez-nous",
-      "copyright": "© {{ year }} Valentine Point. Tous droits réservés."
+      "copyright": "© {{ year }} Orient Outdoor. Tous droits réservés."
     },
     "collection": {
       "add_to_cart": "Ajouter au panier",
@@ -33,12 +33,12 @@
       "quantity": "Quantité",
       "add_to_cart": "Ajouter au panier",
       "buy_now": "Acheter maintenant",
-      "trust_shipping": "Livraison gratuite",
+      "trust_shipping": "Expédition 48h",
       "trust_returns": "Retours sous 30 jours",
-      "trust_guarantee": "Garantie satisfaction",
+      "trust_guarantee": "Conseil honnête",
       "reviews_title": "Avis clients",
-      "review_one": "Un coffret parfait pour une soirée romantique.",
-      "review_two": "Livraison rapide et qualité exceptionnelle."
+      "review_one": "Solide en rando 3 saisons, pas adapté à l'hiver engagé.",
+      "review_two": "Léger et pratique, mais demande un peu de soin au montage."
     }
   }
 }
